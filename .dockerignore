@@ -7,3 +7,9 @@ npm-debug.log*
 .env
 .env.*
 coverage
+.git
+.gitignore
+.dockerignore
+README.md
+*.md
+.DS_Store
