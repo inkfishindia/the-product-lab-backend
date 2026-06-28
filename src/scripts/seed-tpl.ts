@@ -194,14 +194,15 @@ export default async function seedTPLProducts({ container }: ExecArgs) {
     filters: { type: "publishable" },
   });
 
-  let publishableApiKey = existingKeys?.[0];
+  let publishableApiKey: { id: string; token?: string; type?: string; title?: string } | undefined =
+    existingKeys?.[0] as { id: string; token?: string; type?: string; title?: string } | undefined;
   if (!publishableApiKey) {
     const { result } = await createApiKeysWorkflow(container).run({
       input: {
         api_keys: [{ title: "TPL Storefront", type: "publishable", created_by: "" }],
       },
     });
-    publishableApiKey = result[0];
+    publishableApiKey = result[0] as unknown as { id: string; token?: string; type?: string; title?: string };
   }
 
   await linkSalesChannelsToApiKeyWorkflow(container).run({

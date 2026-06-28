@@ -49,6 +49,8 @@ export default async function applyPdpCopy({ container }: ExecArgs) {
     fields: ["id", "description"],
     filters: { status: "published" } as any,
   })
-  const withDesc = pub.filter((p: { description?: string }) => p.description && p.description.trim().length > 0)
+  const withDesc = pub.filter((p: { description?: string | null }) =>
+    !!(p.description && p.description.trim().length > 0)
+  )
   logger.info(`Done. Published products with a description: ${withDesc.length}/${pub.length}.`)
 }
