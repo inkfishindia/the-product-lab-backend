@@ -1,0 +1,9 @@
+node_modules
+.medusa
+.cache
+medusa.log
+db.sqlite
+npm-debug.log*
+.env
+.env.*
+coverage
